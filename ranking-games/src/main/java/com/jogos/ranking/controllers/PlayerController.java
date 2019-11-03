@@ -34,6 +34,9 @@ public class PlayerController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping(path = "/ranking")
+    public List ranking(){ return service.ranking(); }
+
     @PostMapping
     public ResponseEntity<Response<PlayerDTO>> create(@Valid @RequestBody PlayerDTO dto, BindingResult result) {
         Response<PlayerDTO> response = new Response<PlayerDTO>();
@@ -95,6 +98,8 @@ public class PlayerController {
         Player player = new Player();
         player.setId(dto.getId());
         player.setName(dto.getName());
+        player.setMatches(dto.getMatches());
+        player.setVictories(dto.getVictories());
 
         return player;
     }
@@ -103,6 +108,8 @@ public class PlayerController {
         PlayerDTO dto = new PlayerDTO();
         dto.setId(player.getId());
         dto.setName(player.getName());
+        dto.setMatches(player.getMatches());
+        dto.setVictories(player.getVictories());
 
         return dto;
     }

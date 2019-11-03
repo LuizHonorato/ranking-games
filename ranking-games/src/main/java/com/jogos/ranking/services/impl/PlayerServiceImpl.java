@@ -26,6 +26,9 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public List<Player> ranking() { return repository.ranking(); }
+
+    @Override
     public Optional<Player> findById(Long id) {
         return repository.findById(id);
     }

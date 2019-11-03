@@ -17,4 +17,10 @@ public class Player implements Serializable {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private Integer matches;
+
+    @Column(nullable = false)
+    private Integer victories;
 }

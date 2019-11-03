@@ -2,7 +2,6 @@ package com.jogos.ranking.repositories_test;
 
 import com.jogos.ranking.entities.Player;
 import com.jogos.ranking.repositories.PlayerRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,8 @@ public class PlayerRepositoryTest {
     public void testSave() {
         Player player = new Player();
         player.setName("UserTest");
+        player.setMatches(1);
+        player.setVictories(1);
 
         Player response = repository.save(player);
 

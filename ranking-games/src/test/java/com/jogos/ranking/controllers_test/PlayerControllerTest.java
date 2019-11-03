@@ -31,6 +31,8 @@ public class PlayerControllerTest {
 
     private static final Long ID = 1L;
     private static final String NAME = "PlayerName";
+    private static final Integer MATCHES = 1;
+    private static final Integer VICTORIES = 1;
     private static final String URL = "/jogadores";
 
     @MockBean
@@ -43,17 +45,19 @@ public class PlayerControllerTest {
     public void testSave() throws Exception {
         BDDMockito.given(service.save(Mockito.any(Player.class))).willReturn(getMockPlayer());
 
-        mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, NAME))
+        mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, NAME, MATCHES, VICTORIES))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.id").value(ID))
-                .andExpect(jsonPath("$.data.name").value(NAME));
+                .andExpect(jsonPath("$.data.name").value(NAME))
+                .andExpect(jsonPath("$.data.matches").value(MATCHES))
+                .andExpect(jsonPath("$.data.victories").value(VICTORIES));
     }
 
     @Test
     public void testSaveInvalidPlayer() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, "Ex"))
+        mvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, "Ex", MATCHES, VICTORIES))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
@@ -68,10 +72,12 @@ public class PlayerControllerTest {
         return player;
     }
 
-    public String getJsonPayload(Long id, String name) throws JsonProcessingException {
+    public String getJsonPayload(Long id, String name, Integer numMatches, Integer numVictories) throws JsonProcessingException {
         PlayerDTO dto = new PlayerDTO();
         dto.setId(id);
         dto.setName(name);
+        dto.setMatches(numMatches);
+        dto.setVictories(numVictories);
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(dto);

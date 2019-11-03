@@ -11,6 +11,8 @@ public interface PlayerService {
 
     List<Player> findAll();
 
+    List<Player> ranking();
+
     Optional<Player> findById(Long id);
 
     void deleteById(Long id);
