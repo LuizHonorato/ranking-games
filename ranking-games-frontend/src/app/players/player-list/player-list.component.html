@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h2>{{ title }}</h2>
+  </div>
+  <div class="col-sm-6 align-bottom">
+    <button class="btn btn-primary pull-right" routerLink="/players/create">
+      Novo jogador
+    </button>
+  </div>
+</div>
+<table class="table table-striped" style="text-align: left">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Nº de partidas</th>
+      <th>Vitórias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players | async">
+      <td>
+        <div class="btn-group">
+          <button
+            routerLink="/players/edit/{{ player.id }}"
+            class="btn btn-info btn-sm"
+          >
+            <i class="fa fa-pencil-square-o"></i>
+          </button>
+          <button (click)="delete(player.id)" class="btn btn-danger btn-sm">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </td>
+      <td>{{ player.id }}</td>
+      <td>{{ player.name }}</td>
+      <td>{{ player.matches }}</td>
+      <td>{{ player.victories }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,70 @@
+<h2>{{ title }}</h2>
+
+<form
+  #frmGame="ngForm"
+  id="frmGame"
+  novalidate
+  (ngSubmit)="onSavePlayer()"
+  novalidate
+>
+  <div class="row">
+    <label class="control-label col-sm-3" for="txtName">Nome:</label>
+    <div class="col-sm-5">
+      <input
+        id="txtName"
+        type="text"
+        class="form-control"
+        [(ngModel)]="player.name"
+        title="Nome"
+        placeholder="Digite o nome"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <label class="control-label col-sm-3" for="txtMatches"
+      >Nº de partidas:</label
+    >
+    <div class="col-sm-5">
+      <input
+        id="txtMatches"
+        type="number"
+        class="form-control"
+        [(ngModel)]="player.matches"
+        title="Partidas"
+        placeholder="Digite o nº de partidas"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <label class="control-label col-sm-3" for="txtVictories">Vitórias:</label>
+    <div class="col-sm-5">
+      <input
+        id="txtVictories"
+        type="number"
+        class="form-control"
+        [(ngModel)]="player.victories"
+        title="Vitórias"
+        placeholder="Digite o nº de vitórias"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <div class="btn-group">
+      <button type="button" (click)="onBack()" class="btn btn-secondary btn-sm">
+        <i class="fa fa-arrow-left"></i> Voltar
+      </button>
+      <button
+        type="button"
+        (click)="reset()"
+        *ngIf="mode > 0"
+        class="btn btn-danger btn-sm"
+      >
+        <i class="fa fa-undo"></i> Limpar
+      </button>
+    </div>
+  </div>
+</form>
